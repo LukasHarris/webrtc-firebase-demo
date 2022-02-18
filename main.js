@@ -1,10 +1,21 @@
 import './style.css';
 
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+// v8
+// import firebase from "firebase/app";
+// import "firebase/firestore";
+
+// v9 compat packages are API compatible with v8 code
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-  // your config
+  apiKey: "AIzaSyBKbZRBRkj9_exbVOcXCOHQ78Le6CpovFM",
+  authDomain: "webrtc-5113f.firebaseapp.com",
+  projectId: "webrtc-5113f",
+  storageBucket: "webrtc-5113f.appspot.com",
+  messagingSenderId: "464663981520",
+  appId: "1:464663981520:web:211ed0d477e5edc5535dd5"
 };
 
 if (!firebase.apps.length) {
