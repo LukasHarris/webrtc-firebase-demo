@@ -10,12 +10,18 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-// Your config Here
+  apiKey: "AIzaSyBKbZRBRkj9_exbVOcXCOHQ78Le6CpovFM",
+  authDomain: "webrtc-5113f.firebaseapp.com",
+  projectId: "webrtc-5113f",
+  storageBucket: "webrtc-5113f.appspot.com",
+  messagingSenderId: "464663981520",
+  appId: "1:464663981520:web:211ed0d477e5edc5535dd5"
 };
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
+
 const firestore = firebase.firestore();
 
 const servers = {
@@ -41,10 +47,20 @@ const answerButton = document.getElementById('answerButton');
 const remoteVideo = document.getElementById('remoteVideo');
 const hangupButton = document.getElementById('hangupButton');
 
+// Allow testing without WebCams (default is off)
+const webcamCheckBox = document.getElementById('webcamCheckBox');
+
+const mediaDevicesConstraints = { video: false, audio: true };
+
+webcamCheckBox.onchange = function () {
+  mediaDevicesConstraints.video = !mediaDevicesConstraints.video;
+  console.log("MediaDevicesConstraints: ", mediaDevicesConstraints);
+}
+
 // 1. Setup media sources
 
 webcamButton.onclick = async () => {
-  localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+  localStream = await navigator.mediaDevices.getUserMedia(mediaDevicesConstraints); // LH
   remoteStream = new MediaStream();
 
   // Push tracks from local stream to peer connection
